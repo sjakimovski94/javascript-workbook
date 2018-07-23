@@ -12,6 +12,62 @@ function rockPaperScissors(hand1, hand2) {
 
   // Write code here
 
+  //First will convert the input to lowercase. Then will check if the input is correct ( rock, paper, scissors). 
+  // If the input is not correct the program won't run and it'll show "Wrong input! Please enter rock,paper or scissors."
+  //Next will compare the two inputs and show the winner.
+  
+  hand1= hand1.toLowerCase();
+  hand2= hand2.toLowerCase();
+
+  if((hand1=='rock' || hand1== 'paper' || hand1== 'scissors') && (hand2=='rock' || hand2=='paper' || hand2== 'scissors'))
+  {
+    if(hand1=='rock' && hand2=='scissors')
+    {
+      return 'User1 wins. Rock>scissors';
+    }
+    else if(hand1== 'rock' && hand2=='paper' )
+    {
+      return 'User2 wins. Paper>rock';
+    } 
+    else if(hand1 =='rock' && hand2 == 'rock')
+    {
+      return 'Its a tie';
+    }
+  
+    if(hand1=='paper' && hand2=='rock')
+    {
+      return 'User1 wins. Paper>rock';
+    }
+    else if(hand1=='paper' && hand2=='scissors')
+    {
+      return 'User2 wins. Scissors>paper';
+    }
+    else if(hand1 =='paper' && hand2 == 'paper')
+    {
+      return 'Its a tie';
+    }
+  
+    if(hand1=='scissors' && hand2== 'paper')
+    {
+      return 'User1 wins. Scissors>paper';
+    }
+  
+    else if(hand1=='scissors' && hand2=='rock')
+    {
+      return 'User2 wins. Rock>scissors';
+    }
+    else if(hand1 =='scissors' && hand2 =='scissors')
+    {
+      return 'Its a tie!';
+    }
+  }
+  else{
+  return 'Wrong input!Please enter rock,paper or scissors.';
+}
+
+
+
+
 }
 
 function getPrompt() {
