@@ -62,7 +62,7 @@ function rockPaperScissors(hand1, hand2) {
     }
   }
   else{
-  return 'Wrong input!Please enter rock,paper or scissors.';
+  return 'Wrong input!Please enter rock,paper or scissors. ';
 }
 
 
