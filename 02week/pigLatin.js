@@ -29,7 +29,7 @@ const checkInput=(input)=>
 
 const lowerCase=(input)=>
 {
-  return input.toLowerCase();
+  return input.toLowerCase().trim();
 }
 
 
@@ -40,6 +40,10 @@ const pigLatin=(word)=>
     word= lowerCase(word);
     const wordarray= word.split("");
     const newArr=[];
+    if(wordarray[0]=='a'|| wordarray[0]=='e' || wordarray[0]=='i' ||wordarray[0]=='o' ||wordarray[0]=='u' || wordarray[0]=='y')
+    {
+      return wordarray.join("") + 'yay';
+    }
     for(let i=0;i<wordarray.length;i++)
     {
       if(wordarray[i]=='a'|| wordarray[i]=='e' || wordarray[i]=='i' ||wordarray[i]=='o' ||wordarray[i]=='u' || wordarray[i]=='y')
