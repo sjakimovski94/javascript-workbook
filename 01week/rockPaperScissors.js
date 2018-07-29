@@ -16,49 +16,49 @@ function rockPaperScissors(hand1, hand2) {
   // If the input is not correct the program won't run and it'll show "Wrong input! Please enter rock,paper or scissors."
   //Next will compare the two inputs and show the winner.
   
-  hand1= hand1.toLowerCase();
-  hand2= hand2.toLowerCase();
+  hand1= hand1.toLowerCase().trim();
+  hand2= hand2.toLowerCase().trim();
 
-  if((hand1=='rock' || hand1== 'paper' || hand1== 'scissors') && (hand2=='rock' || hand2=='paper' || hand2== 'scissors'))
+  if((hand1=='rock' || hand1=='paper' || hand1== 'scissors') && (hand2=='rock' || hand2=='paper' || hand2=='scissors'))
   {
     if(hand1=='rock' && hand2=='scissors')
     {
-      return 'User1 wins. Rock>scissors';
+      return 'Hand one wins!';
     }
     else if(hand1== 'rock' && hand2=='paper' )
     {
-      return 'User2 wins. Paper>rock';
+      return 'Hand two wins!';
     } 
     else if(hand1 =='rock' && hand2 == 'rock')
     {
-      return 'Its a tie';
+      return "It's a tie!";
     }
   
     if(hand1=='paper' && hand2=='rock')
     {
-      return 'User1 wins. Paper>rock';
+      return 'Hand one wins!';
     }
     else if(hand1=='paper' && hand2=='scissors')
     {
-      return 'User2 wins. Scissors>paper';
+      return 'Hand two wins!';
     }
     else if(hand1 =='paper' && hand2 == 'paper')
     {
-      return 'Its a tie';
+      return "It's a tie!";
     }
   
     if(hand1=='scissors' && hand2== 'paper')
     {
-      return 'User1 wins. Scissors>paper';
+      return 'Hand one wins!';
     }
   
     else if(hand1=='scissors' && hand2=='rock')
     {
-      return 'User2 wins. Rock>scissors';
+      return 'Hand two wins!';
     }
     else if(hand1 =='scissors' && hand2 =='scissors')
     {
-      return 'Its a tie!';
+      return "It's a tie!";
     }
   }
   else{
@@ -91,13 +91,19 @@ if (typeof describe === 'function') {
     });
     it('should detect which hand won', () => {
       assert.equal(rockPaperScissors('rock', 'paper'), "Hand two wins!");
-      assert.equal(rockPaperScissors('paper', 'scissors'), "Hand two wins!");
       assert.equal(rockPaperScissors('rock', 'scissors'), "Hand one wins!");
+      assert.equal(rockPaperScissors('paper', 'rock'), "Hand one wins!");
+      assert.equal(rockPaperScissors('paper', 'scissors'), "Hand two wins!");
+      assert.equal(rockPaperScissors('scissors', 'rock'), "Hand two wins!");
+      assert.equal(rockPaperScissors('scissors', 'paper'), "Hand one wins!");
     });
     it('should scrub input to ensure lowercase with "trim"ed whitepace', () => {
-      assert.equal(rockPaperScissors('rOcK', ' paper '), "Hand two wins!");
-      assert.equal(rockPaperScissors('Paper', 'SCISSORS'), "Hand two wins!");
-      assert.equal(rockPaperScissors('rock ', 'sCiSsOrs'), "Hand one wins!");
+      assert.equal(rockPaperScissors('rOck', 'paPer'), "Hand two wins!");
+      assert.equal(rockPaperScissors('rOCk', 'scIssoRs'), "Hand one wins!");
+      assert.equal(rockPaperScissors('PAper', 'rocK'), "Hand one wins!");
+      assert.equal(rockPaperScissors('paPEr', 'SCISSors'), "Hand two wins!");
+      assert.equal(rockPaperScissors('ScIssoRs', 'rocK'), "Hand two wins!");
+      assert.equal(rockPaperScissors('scissorS', 'PAPER'), "Hand one wins!");
     });
   });
 } else {
