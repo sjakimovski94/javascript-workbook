@@ -16,59 +16,50 @@ function rockPaperScissors(hand1, hand2) {
   // If the input is not correct the program won't run and it'll show "Wrong input! Please enter rock,paper or scissors."
   //Next will compare the two inputs and show the winner.
   
-  hand1= hand1.toLowerCase().trim();
-  hand2= hand2.toLowerCase().trim();
+  const  hand1Formatted = hand1.toLowerCase().trim();
+  const  hand2Formatted = hand2.toLowerCase().trim();
 
-  if((hand1=='rock' || hand1=='paper' || hand1== 'scissors') && (hand2=='rock' || hand2=='paper' || hand2=='scissors'))
+  if((hand1Formatted=='rock' || hand1Formatted=='paper' || hand1Formatted== 'scissors') && (hand2Formatted=='rock' || hand2Formatted=='paper' || hand2Formatted=='scissors'))
   {
-    if(hand1=='rock' && hand2=='scissors')
-    {
-      return 'Hand one wins!';
-    }
-    else if(hand1== 'rock' && hand2=='paper' )
-    {
-      return 'Hand two wins!';
-    } 
-    else if(hand1 =='rock' && hand2 == 'rock')
-    {
+    if(hand1Formatted===hand2Formatted){
       return "It's a tie!";
     }
-  
-    if(hand1=='paper' && hand2=='rock')
-    {
-      return 'Hand one wins!';
+
+    if(hand1Formatted=='rock'){
+      if(hand2Formatted=='paper'){
+           return 'Hand two wins!';
+      }
+      else{
+        return 'Hand one wins!';
+        }
     }
-    else if(hand1=='paper' && hand2=='scissors')
-    {
-      return 'Hand two wins!';
+    else if(hand1Formatted=='paper'){
+      if(hand2Formatted=='rock'){
+        return 'Hand one wins!';
+      }
+      else{
+        return 'Hand two wins!';
+      }
     }
-    else if(hand1 =='paper' && hand2 == 'paper')
-    {
-      return "It's a tie!";
-    }
-  
-    if(hand1=='scissors' && hand2== 'paper')
-    {
-      return 'Hand one wins!';
-    }
-  
-    else if(hand1=='scissors' && hand2=='rock')
-    {
-      return 'Hand two wins!';
-    }
-    else if(hand1 =='scissors' && hand2 =='scissors')
-    {
-      return "It's a tie!";
+    else if(hand1Formatted=='scissors'){
+      if(hand2Formatted=='rock'){
+        return 'Hand two wins!';
+      }
+      else{
+        return 'Hand one wins!';
+      }
     }
   }
-  else{
-  return 'Wrong input!Please enter rock,paper or scissors. ';
+else{
+    return 'Wrong input!Please enter rock,paper or scissors.';
+    }
 }
 
 
 
 
-}
+
+
 
 function getPrompt() {
   rl.question('hand1: ', (answer1) => {
