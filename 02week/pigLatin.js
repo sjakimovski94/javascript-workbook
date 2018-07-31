@@ -19,45 +19,35 @@ const rl = readline.createInterface({
 //add 'ay' at the end of the word
 
 
-const checkInput=(input)=>
-{
-  if(typeof input=='string')
-  {
+const checkInput=(input)=>{
+    if(typeof input=='string'){
     return true;
   }
 }
 
-const lowerCase=(input)=>
-{
+const lowerCase=(input)=>{
   return input.toLowerCase().trim();
 }
 
 
-const pigLatin=(word)=>
-{
-  if(checkInput(word))
-  {
+const pigLatin=(word)=>{
+  if(checkInput(word)){
     word= lowerCase(word);
     const wordarray= word.split("");
     const newArr=[];
-    if(wordarray[0]=='a'|| wordarray[0]=='e' || wordarray[0]=='i' ||wordarray[0]=='o' ||wordarray[0]=='u' || wordarray[0]=='y')
-    {
+    if(wordarray[0]=='a'|| wordarray[0]=='e' || wordarray[0]=='i' ||wordarray[0]=='o' ||wordarray[0]=='u' || wordarray[0]=='y'){
       return wordarray.join("") + 'yay';
     }
-    for(let i=0;i<wordarray.length;i++)
-    {
-      if(wordarray[i]=='a'|| wordarray[i]=='e' || wordarray[i]=='i' ||wordarray[i]=='o' ||wordarray[i]=='u' || wordarray[i]=='y')
-      {
+    for(let i=0;i<wordarray.length;i++){
+      if(wordarray[i]=='a'|| wordarray[i]=='e' || wordarray[i]=='i' ||wordarray[i]=='o' ||wordarray[i]=='u' || wordarray[i]=='y'){
         return wordarray.splice(i).join("") + newArr.join("") + 'ay';
       }
-      else
-      {
+      else{
         newArr.push(wordarray[i]);
       }
     }
   }
-  else
-    {
+  else{
       console.log('Please enter a valid input!');
     }
 }
