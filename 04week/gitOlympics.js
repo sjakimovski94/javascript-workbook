@@ -10,3 +10,5 @@ const printListOfOlympians=(olympiansArr)=>
 }
 
 printListOfOlympians(olympiansArr);
+
+
