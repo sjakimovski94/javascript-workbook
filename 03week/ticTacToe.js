@@ -24,36 +24,57 @@ function printBoard() {
 }
 
 function horizontalWin() {
-  // Your code here
+  return (board[0][0]=='X' && board[0][1]=='X' && board[0][2]=='X' ||  board[0][0]=='O' && board[0][1]=='O' && board[0][2]=='O') 
+  || (board[1][0]=='X' && board[1][1]=='X' && board[1][2]=='X' || board[1][0]=='O' && board[1][1]=='O' && board[1][2]=='O') 
+  || (board[2][0]=='X' && board[2][1]=='X' && board[2][2]=='X' || board[2][0]=='O' && board[2][1]=='O' && board[2][2]=='O')
 }
 
 function verticalWin() {
-  // Your code here
+  return (board[0][0]=='X' && board[1][0]=='X' && board[2][0]=='X' || board[0][0]=='O' && board[1][0]=='O' && board[2][0]=='O') 
+  || (board[0][1]=='X' && board[1][1]=='X' && board[2][1]=='X' || board[0][1]=='O' && board[1][1]=='O' && board[2][1]=='O') 
+  || (board[0][2]=='X' && board[1][2]=='X' && board[2][2]=='X' || board[0][2]=='O' && board[1][2]=='O' && board[2][2]=='O')
 }
 
 function diagonalWin() {
-  // Your code here
+  return (board[0][0]=='X' && board[1][1]=='X' && board[2][2]=='X' || board[0][0]=='O' && board[1][1]=='O' && board[2][2]=='O') 
+  || (board[2][0]=='X' && board[1][1]=='X' && board[0][2]=='X' || board[2][0]=='O' && board[1][1]=='O' && board[0][2]=='O')
 }
 
 function checkForWin() {
-  // Your code here
+  return "Player: "+playerTurn + " won";
 }
 
 function ticTacToe(row, column) {
-  // Your code here
+  if(playerTurn=='X'){
+    playerTurn='O';
+    return board[row][column]='X';
+  }
+  else{
+    playerTurn='X';
+    return board[row][column]='O';
+  }
 }
 
 function getPrompt() {
   printBoard();
+  if(horizontalWin() || verticalWin() || diagonalWin()){
+    console.log("Player " + playerTurn + " won");
+  }
+  else{
   console.log("It's Player " + playerTurn + "'s turn.");
   rl.question('row: ', (row) => {
     rl.question('column: ', (column) => {
       ticTacToe(row, column);
+      
       getPrompt();
     });
-  });
+    });
+  }
+  }
 
-}
+
+
+
 
 
 
