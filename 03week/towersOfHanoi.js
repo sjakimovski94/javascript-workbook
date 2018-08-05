@@ -19,8 +19,25 @@ function printStacks() {
   console.log("c: " + stacks.c);
 }
 
-function movePiece() {
-
+function movePiece(startStack,endStack) {
+    if(startStack=='a' && endStack=='b'){
+      return stacks.b.push(stacks.a[stacks.a.length-1]) && stacks.a.splice(stacks.a.length-1,1);
+    }
+    else if(startStack=='a' && endStack=='c'){
+      return stacks.c.push(stacks.a[stacks.a.length-1]) && stacks.a.splice(stacks.a.length-1,1);
+    }
+    if(startStack=='b' && endStack=='a'){
+      return stacks.a.push(stacks.b[stacks.b.length-1]) && stacks.b.splice(stacks.b.length-1);
+    }
+    else if(startStack=='b' && endStack=='c'){
+      return stacks.c.push(stacks.b[stacks.b.length-1]) && stacks.b.splice(stacks.b.length-1);
+    }
+  if(startStack=='c' && endStack=='a'){
+      return stacks.a.push(stacks.c[stacks.c.length-1]) && stacks.c.splice(stacks.c.length-1);
+    }
+    else if(startStack=='c' && endStack=='b'){
+      return stacks.b.push(stacks.c[stacks.c.length-1]) && stacks.c.splice(stacks.c.length-1);  
+  }
 }
 
 
@@ -82,24 +99,6 @@ function checkForWin() {
 }
 
 function towersOfHanoi(startStack, endStack) {
-  if(startStack=='a' && endStack=='b'){
-      return stacks.b.push(stacks.a[stacks.a.length-1]) && stacks.a.splice(stacks.a.length-1,1);
-    }
-    else if(startStack=='a' && endStack=='c'){
-      return stacks.c.push(stacks.a[stacks.a.length-1]) && stacks.a.splice(stacks.a.length-1,1);
-    }
-  if(startStack=='b' && endStack=='a'){
-      return stacks.a.push(stacks.b[stacks.b.length-1]) && stacks.b.splice(stacks.b.length-1);
-    }
-    else if(startStack=='b' && endStack=='c'){
-      return stacks.c.push(stacks.b[stacks.b.length-1]) && stacks.b.splice(stacks.b.length-1);
-    }
-  if(startStack=='c' && endStack=='a'){
-      return stacks.a.push(stacks.c[stacks.c.length-1]) && stacks.c.splice(stacks.c.length-1);
-    }
-    else if(startStack=='c' && endStack=='b'){
-      return stacks.b.push(stacks.c[stacks.c.length-1]) && stacks.c.splice(stacks.c.length-1);
-  }
 
 }
 
@@ -108,7 +107,7 @@ function getPrompt() {
   rl.question('start stack: ', (startStack) => {
     rl.question('end stack: ', (endStack) => {
       if (isLegal(startStack,endStack)){
-        towersOfHanoi(startStack,endStack)
+        movePiece(startStack,endStack)
         if(checkForWin()){
           return console.log("You won!");
         }
