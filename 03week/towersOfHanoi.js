@@ -109,7 +109,9 @@ function getPrompt() {
     rl.question('end stack: ', (endStack) => {
       if (isLegal(startStack,endStack)){
         towersOfHanoi(startStack,endStack)
-        checkForWin();
+        if(checkForWin()){
+          return console.log("You won!");
+        }
       }
       getPrompt();
     });
