@@ -20,22 +20,86 @@ function printStacks() {
 }
 
 function movePiece() {
-  // Your code here
 
 }
 
-function isLegal() {
-  // Your code here
+
+function isLegal(startStack,endStack) {
+  if(startStack=='a' && endStack=='b'){
+    if(stacks.a[stacks.a.length-1] < stacks.b[stacks.b.length-1] || stacks.b[stacks.b.length-1]==undefined){
+      return true;
+    }
+    else{
+      return console.log("Error!" + stacks.a[stacks.a.length-1] + " needs to be lower number than " + stacks.b[stacks.b.length-1]);
+    }
+  }
+  else if(startStack=='a' && endStack=='c'){
+    if(stacks.a[stacks.a.length-1] < stacks.c[stacks.c.length-1] || stacks.c[stacks.c.length-1]==undefined){
+        return true;
+      }
+    else{
+      return console.log("Error!" + stacks.a[stacks.a.length-1] + " needs to be lower number than " + stacks.c[stacks.c.length-1]);
+      }
+    }
+    if(startStack=='b' && endStack=='a'){
+      if(stacks.b[stacks.b.length-1] < stacks.a[stacks.a.length-1] || stacks.a[stacks.a.length-1]==undefined){
+        return true;
+      }
+      else{
+      return console.log("Error!" + stacks.b[stacks.b.length-1] + " needs to be lower number than " + stacks.a[stacks.a.length-1]);
+      }
+    }
+    else if(startStack=='b' && endStack=='c'){
+      if(stacks.b[stacks.b.length-1] < stacks.c[stacks.c.length-1] || stacks.c[stacks.c.length-1]==undefined){
+        return true;
+    }
+    else{
+      return console.log("Error!" + stacks.b[stacks.b.length-1] + " needs to be lower number than " + stacks.c[stacks.c.length-1]);
+      }
+  }
+  if(startStack=='c' && endStack=='a'){
+    if(stacks.c[stacks.c.length-1] < stacks.a[stacks.a.length-1] || stacks.a[stacks.a.length-1]==undefined){
+      return true;
+    }
+    else{
+      return console.log("Error!" + stacks.c[stacks.c.length-1] + " needs to be lower number than " + stacks.a[stacks.a.length-1]);
+      }
+    }
+    else if(startStack=='c' && endStack=='b'){
+      if(stacks.c[stacks.c.length-1] < stacks.b[stacks.b.length-1] || stacks.b[stacks.b.length-1]==undefined){
+        return true;
+      }
+      else{
+        return console.log("Error!" + stacks.c[stacks.c.length-1] + " needs to be lower number than " + stacks.b[stacks.b.length-1]);
+        }
+    }
 
 }
+
 
 function checkForWin() {
-  // Your code here
-
+  return stacks.c[0]==4 && stacks.c[1]==3 && stacks.c[2]==2 && stacks.c[3]==1;
 }
 
 function towersOfHanoi(startStack, endStack) {
-  // Your code here
+  if(startStack=='a' && endStack=='b'){
+      return stacks.b.push(stacks.a[stacks.a.length-1]) && stacks.a.splice(stacks.a.length-1,1);
+    }
+    else if(startStack=='a' && endStack=='c'){
+      return stacks.c.push(stacks.a[stacks.a.length-1]) && stacks.a.splice(stacks.a.length-1,1);
+    }
+  if(startStack=='b' && endStack=='a'){
+      return stacks.a.push(stacks.b[stacks.b.length-1]) && stacks.b.splice(stacks.b.length-1);
+    }
+    else if(startStack=='b' && endStack=='c'){
+      return stacks.c.push(stacks.b[stacks.b.length-1]) && stacks.b.splice(stacks.b.length-1);
+    }
+  if(startStack=='c' && endStack=='a'){
+      return stacks.a.push(stacks.c[stacks.c.length-1]) && stacks.c.splice(stacks.c.length-1);
+    }
+    else if(startStack=='c' && endStack=='b'){
+      return stacks.b.push(stacks.c[stacks.c.length-1]) && stacks.c.splice(stacks.c.length-1);
+  }
 
 }
 
@@ -43,7 +107,10 @@ function getPrompt() {
   printStacks();
   rl.question('start stack: ', (startStack) => {
     rl.question('end stack: ', (endStack) => {
-      towersOfHanoi(startStack, endStack);
+      if (isLegal(startStack,endStack)){
+        towersOfHanoi(startStack,endStack)
+        checkForWin();
+      }
       getPrompt();
     });
   });
