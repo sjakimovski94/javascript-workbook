@@ -7,6 +7,15 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
+//islegal function will check if startstack can be moved to endstack
+//(will work if startstack number is lower than endstack or if endstack is empty)
+//towersOfHanoi function will push startstack or endstack ONLY if islegal function is true
+//checkforwin will return true if all 4 numbers are transfered to C in numerical order (c: [4,3,2,1])
+//on user input will check the input if its correct (a,b or c), if correct will run islegal->towersofhanoi->checkforwin
+//if not will show "please enter a,b or c"
+
+
+
 let stacks = {
   a: [4, 3, 2, 1],
   b: [],
@@ -19,7 +28,78 @@ function printStacks() {
   console.log("c: " + stacks.c);
 }
 
-function movePiece(startStack,endStack) {
+
+
+
+function isLegal(startStack,endStack) {
+    if(startStack=='a'){
+      if(endStack=='b'){
+        if(stacks.a[stacks.a.length-1] < stacks.b[stacks.b.length-1] || stacks.b[stacks.b.length-1]==undefined){
+          return true;
+        }
+      else{
+        console.log("Error!" + stacks.a[stacks.a.length-1] + " needs to be lower number than " + stacks.b[stacks.b.length-1]);
+        return false;
+      }
+    }
+  else{
+    if(stacks.a[stacks.a.length-1] < stacks.c[stacks.c.length-1] || stacks.c[stacks.c.length-1]==undefined){
+        return true;
+      }
+    else{
+      console.log("Error!" + stacks.a[stacks.a.length-1] + " needs to be lower number than " + stacks.c[stacks.c.length-1]);
+      return false;
+      }
+    }
+  }
+  if(startStack=='b'){
+    if(endStack=='a'){
+        if(stacks.b[stacks.b.length-1] < stacks.a[stacks.a.length-1] || stacks.a[stacks.a.length-1]==undefined){
+        return true;
+        }
+      else{
+        console.log("Error!" + stacks.b[stacks.b.length-1] + " needs to be lower number than " + stacks.a[stacks.a.length-1]);
+        return false;
+      }
+    }
+    else{
+      if(stacks.b[stacks.b.length-1] < stacks.c[stacks.c.length-1] || stacks.c      [stacks.c.length-1]==undefined){
+        return true;
+    }
+    else{
+      console.log("Error!" + stacks.b[stacks.b.length-1] + " needs to be lower number than " + stacks.c[stacks.c.length-1]);
+      return false;
+      }
+    }
+  }
+    if(startStack=='c'){
+      if(endStack=='a'){
+        if(stacks.c[stacks.c.length-1] < stacks.a[stacks.a.length-1] || stacks.a[stacks.a.length-1]==undefined){
+      return true;
+      }
+      else{
+        console.log("Error!" + stacks.c[stacks.c.length-1] + " needs to be lower number than " + stacks.a[stacks.a.length-1]);
+        return false;
+        }
+      }
+    else{
+        if(stacks.c[stacks.c.length-1] < stacks.b[stacks.b.length-1] || stacks.b[stacks.b.length-1]==undefined){
+        return true;
+        }
+      else{
+          console.log("Error!" + stacks.c[stacks.c.length-1] + " needs to be lower number than " + stacks.b[stacks.b.length-1]);
+          return false;
+        }
+      }
+    }
+}
+
+
+function checkForWin() {
+  return stacks.c[0]==4 && stacks.c[1]==3 && stacks.c[2]==2 && stacks.c[3]==1;
+}
+
+function towersOfHanoi(startStack, endStack) {
   if(startStack=='a'){
     if(endStack=='b'){
       return stacks.b.push(stacks.a[stacks.a.length-1]) && stacks.a.splice(stacks.a.length-1,1);
@@ -47,81 +127,22 @@ function movePiece(startStack,endStack) {
 }
 
 
-function isLegal(startStack,endStack) {
-    if(startStack=='a'){
-      if(endStack=='b'){
-        if(stacks.a[stacks.a.length-1] < stacks.b[stacks.b.length-1] || stacks.b[stacks.b.length-1]==undefined){
-          return true;
-        }
-      else{
-        return console.log("Error!" + stacks.a[stacks.a.length-1] + " needs to be lower number than " + stacks.b[stacks.b.length-1]);
-      }
-    }
-  else{
-    if(stacks.a[stacks.a.length-1] < stacks.c[stacks.c.length-1] || stacks.c[stacks.c.length-1]==undefined){
-        return true;
-      }
-    else{
-      return console.log("Error!" + stacks.a[stacks.a.length-1] + " needs to be lower number than " + stacks.c[stacks.c.length-1]);
-      }
-    }
-  }
-  if(startStack=='b'){
-    if(endStack=='a'){
-        if(stacks.b[stacks.b.length-1] < stacks.a[stacks.a.length-1] || stacks.a[stacks.a.length-1]==undefined){
-        return true;
-        }
-      else{
-        return console.log("Error!" + stacks.b[stacks.b.length-1] + " needs to be lower number than " + stacks.a[stacks.a.length-1]);
-      }
-    }
-    else{
-      if(stacks.b[stacks.b.length-1] < stacks.c[stacks.c.length-1] || stacks.c      [stacks.c.length-1]==undefined){
-        return true;
-    }
-    else{
-      return console.log("Error!" + stacks.b[stacks.b.length-1] + " needs to be lower number than " + stacks.c[stacks.c.length-1]);
-      }
-    }
-  }
-    if(startStack=='c'){
-      if(endStack=='a'){
-        if(stacks.c[stacks.c.length-1] < stacks.a[stacks.a.length-1] || stacks.a[stacks.a.length-1]==undefined){
-      return true;
-      }
-      else{
-        return console.log("Error!" + stacks.c[stacks.c.length-1] + " needs to be lower number than " + stacks.a[stacks.a.length-1]);
-        }
-      }
-    else{
-        if(stacks.c[stacks.c.length-1] < stacks.b[stacks.b.length-1] || stacks.b[stacks.b.length-1]==undefined){
-        return true;
-        }
-      else{
-          return console.log("Error!" + stacks.c[stacks.c.length-1] + " needs to be lower number than " + stacks.b[stacks.b.length-1]);
-        }
-      }
-    }
-}
 
-
-function checkForWin() {
-  return stacks.c[0]==4 && stacks.c[1]==3 && stacks.c[2]==2 && stacks.c[3]==1;
-}
-
-function towersOfHanoi(startStack, endStack) {
-
-}
 
 function getPrompt() {
   printStacks();
   rl.question('start stack: ', (startStack) => {
     rl.question('end stack: ', (endStack) => {
-      if (isLegal(startStack,endStack)){
-        movePiece(startStack,endStack)
-        if(checkForWin()){
-          return console.log("You won!");
+      if((startStack=='a' || startStack=='b' || startStack=='c') && (endStack=='a' || endStack=='b' || endStack=='c')){
+        if (isLegal(startStack,endStack)){
+          towersOfHanoi(startStack,endStack)
+          if(checkForWin()){
+            return console.log("You won!");
+          }
         }
+      }
+      else{
+        console.log("Please enter a,b or c!");
       }
       getPrompt();
     });
@@ -159,7 +180,7 @@ if (typeof describe === 'function') {
   });
   describe('#checkForWin()', () => {
     it('should detect a win', () => {
-      stacks = { a: [], c: [4, 3, 2, 1], b: [] };
+      stacks = { a: [], b: [], c: [4,3,2,1] };
       assert.equal(checkForWin(), true);
       stacks = { a: [1], b: [4, 3, 2], c: [] };
       assert.equal(checkForWin(), false);
