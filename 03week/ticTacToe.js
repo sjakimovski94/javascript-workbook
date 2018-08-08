@@ -41,37 +41,46 @@ function diagonalWin() {
 }
 
 function checkForWin() {
-  return "Player: "+playerTurn + " won";
+  return horizontalWin() || verticalWin() || diagonalWin()
 }
 
 function ticTacToe(row, column) {
   if(playerTurn=='X'){
-    playerTurn='O';
-    return board[row][column]='X';
+    board[row][column]='X';
   }
   else{
-    playerTurn='X';
-    return board[row][column]='O';
+    board[row][column]='O';
   }
+  if(checkForWin()){
+    console.log("Player " + playerTurn + " won");
+  }
+  else{
+    if(playerTurn=='X'){
+      playerTurn='O'
+    }
+    else{
+      playerTurn='X';
+    }
+  }
+  
 }
 
 function getPrompt() {
   printBoard();
-  if(horizontalWin() || verticalWin() || diagonalWin()){
+  if(checkForWin())
+  {
     console.log("Player " + playerTurn + " won");
   }
   else{
   console.log("It's Player " + playerTurn + "'s turn.");
   rl.question('row: ', (row) => {
     rl.question('column: ', (column) => {
-      ticTacToe(row, column);
-      
-      getPrompt();
+      ticTacToe(row, column)
+      getPrompt(); 
     });
     });
-  }
-  }
-
+}
+}
 
 
 
