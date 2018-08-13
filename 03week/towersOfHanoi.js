@@ -29,7 +29,19 @@ function printStacks() {
 }
 
 
-
+function resetStacks(input){
+  if(input=="Y"){
+    stacks = {
+      a: [4, 3, 2, 1],
+      b: [],
+      c: []
+    };
+    getPrompt();
+  }
+  else{
+    console.log("Thank you for playing Towers Of Hanoi!");
+  }
+}
 
 function isLegal(startStack,endStack) {
     if(startStack=='a'){
@@ -137,7 +149,10 @@ function getPrompt() {
         if (isLegal(startStack,endStack)){
           towersOfHanoi(startStack,endStack)
           if(checkForWin()){
-            return console.log("You won!");
+            console.log("You won! Would you like to reset and play again? Enter Y for Yes, N for No");
+            rl.question("", (input) => {
+              resetStacks(input);
+            })
           }
         }
       }
