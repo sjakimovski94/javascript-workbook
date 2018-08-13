@@ -24,20 +24,20 @@ function printBoard() {
 }
 
 function horizontalWin() {
-  return (board[0][0]=='X' && board[0][1]=='X' && board[0][2]=='X' ||  board[0][0]=='O' && board[0][1]=='O' && board[0][2]=='O') 
-  || (board[1][0]=='X' && board[1][1]=='X' && board[1][2]=='X' || board[1][0]=='O' && board[1][1]=='O' && board[1][2]=='O') 
-  || (board[2][0]=='X' && board[2][1]=='X' && board[2][2]=='X' || board[2][0]=='O' && board[2][1]=='O' && board[2][2]=='O')
+  return (board[0][0]==playerTurn && board[0][1]==playerTurn && board[0][2]==playerTurn) 
+  || (board[1][0]==playerTurn && board[1][1]==playerTurn && board[1][2]==playerTurn) 
+  || (board[2][0]==playerTurn && board[2][1]==playerTurn && board[2][2]==playerTurn)
 }
 
 function verticalWin() {
-  return (board[0][0]=='X' && board[1][0]=='X' && board[2][0]=='X' || board[0][0]=='O' && board[1][0]=='O' && board[2][0]=='O') 
-  || (board[0][1]=='X' && board[1][1]=='X' && board[2][1]=='X' || board[0][1]=='O' && board[1][1]=='O' && board[2][1]=='O') 
-  || (board[0][2]=='X' && board[1][2]=='X' && board[2][2]=='X' || board[0][2]=='O' && board[1][2]=='O' && board[2][2]=='O')
+  return (board[0][0]==playerTurn && board[1][0]==playerTurn && board[2][0]==playerTurn) 
+  || (board[0][1]==playerTurn && board[1][1]==playerTurn && board[2][1]==playerTurn) 
+  || (board[0][2]==playerTurn && board[1][2]==playerTurn && board[2][2]==playerTurn)
 }
 
 function diagonalWin() {
-  return (board[0][0]=='X' && board[1][1]=='X' && board[2][2]=='X' || board[0][0]=='O' && board[1][1]=='O' && board[2][2]=='O') 
-  || (board[2][0]=='X' && board[1][1]=='X' && board[0][2]=='X' || board[2][0]=='O' && board[1][1]=='O' && board[0][2]=='O')
+  return (board[0][0]==playerTurn && board[1][1]==playerTurn && board[2][2]==playerTurn) 
+  || (board[2][0]==playerTurn && board[1][1]==playerTurn && board[0][2]==playerTurn)
 }
 
 function checkForWin() {
@@ -67,11 +67,6 @@ function ticTacToe(row, column) {
 
 function getPrompt() {
   printBoard();
-  if(checkForWin())
-  {
-    console.log("Player " + playerTurn + " won");
-  }
-  else{
   console.log("It's Player " + playerTurn + "'s turn.");
   rl.question('row: ', (row) => {
     rl.question('column: ', (column) => {
@@ -80,7 +75,7 @@ function getPrompt() {
     });
     });
 }
-}
+
 
 
 
