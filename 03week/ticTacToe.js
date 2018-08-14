@@ -45,12 +45,7 @@ function checkForWin() {
 }
 
 function ticTacToe(row, column) {
-  if(playerTurn=='X'){
-    board[row][column]='X';
-  }
-  else{
-    board[row][column]='O';
-  }
+  board[row][column]=playerTurn;
   if(checkForWin()){
     console.log("Player " + playerTurn + " won");
   }
@@ -62,7 +57,6 @@ function ticTacToe(row, column) {
       playerTurn='X';
     }
   }
-  
 }
 
 function getPrompt() {
