@@ -111,7 +111,7 @@ function checkForWin() {
   return stacks.c[0]==4 && stacks.c[1]==3 && stacks.c[2]==2 && stacks.c[3]==1;
 }
 
-function towersOfHanoi(startStack, endStack) {
+function movePiece(startStack, endStack) {
   if(startStack=='a'){
     if(endStack=='b'){
       return stacks.b.push(stacks.a[stacks.a.length-1]) && stacks.a.splice(stacks.a.length-1,1);
@@ -140,25 +140,30 @@ function towersOfHanoi(startStack, endStack) {
 
 
 
+function towersOfHanoi(startStack, endStack){
+  if((startStack=='a' || startStack=='b' || startStack=='c') && (endStack=='a' || endStack=='b' || endStack=='c')){
+    if (isLegal(startStack,endStack)){
+      movePiece(startStack,endStack)
+      if(checkForWin()){
+        console.log("You won! Would you like to reset and play again? Enter Y for Yes, N for No");
+        rl.question("", (input) => {
+        resetStacks(input);
+        })
+      }
+    }
+  }
+  else{
+        console.log("Please enter a,b or c!");
+        }
+      
+    }
+
 
 function getPrompt() {
   printStacks();
   rl.question('start stack: ', (startStack) => {
     rl.question('end stack: ', (endStack) => {
-      if((startStack=='a' || startStack=='b' || startStack=='c') && (endStack=='a' || endStack=='b' || endStack=='c')){
-        if (isLegal(startStack,endStack)){
-          towersOfHanoi(startStack,endStack)
-          if(checkForWin()){
-            console.log("You won! Would you like to reset and play again? Enter Y for Yes, N for No");
-            rl.question("", (input) => {
-              resetStacks(input);
-            })
-          }
-        }
-      }
-      else{
-        console.log("Please enter a,b or c!");
-      }
+      towersOfHanoi(startStack,endStack);
       getPrompt();
     });
   });
