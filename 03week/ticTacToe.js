@@ -6,6 +6,12 @@ const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout
 });
+
+
+//Player X will start first
+//function TicTacToe will push player X's input of row and column into board
+//Next will change player to 'O' and push his input into board
+//checkforwin function will return true if there is horizontal,vertical or diagonal win 
 let board = [
   [' ', ' ', ' '],
   [' ', ' ', ' '],
