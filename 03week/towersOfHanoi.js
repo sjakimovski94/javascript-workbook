@@ -44,71 +44,18 @@ function resetStacks(input){
 }
 
 function isLegal(startStack,endStack) {
-    if(startStack=='a'){
-      if(endStack=='b'){
-        if(stacks.a[stacks.a.length-1] < stacks.b[stacks.b.length-1] || stacks.b[stacks.b.length-1]==undefined){
-          return true;
-        }
-      else{
-        console.log("Error!" + stacks.a[stacks.a.length-1] + " needs to be lower number than " + stacks.b[stacks.b.length-1]);
-        return false;
-      }
-    }
-  else{
-    if(stacks.a[stacks.a.length-1] < stacks.c[stacks.c.length-1] || stacks.c[stacks.c.length-1]==undefined){
-        return true;
-      }
-    else{
-      console.log("Error!" + stacks.a[stacks.a.length-1] + " needs to be lower number than " + stacks.c[stacks.c.length-1]);
-      return false;
-      }
-    }
+
+  if(stacks[endStack][stacks[endStack].length-1]>stacks[startStack][stacks[startStack].length-1] || stacks[endStack][stacks[endStack].length-1]==undefined){
+    return true;
+  }else{
+    console.log(stacks[endStack][stacks[endStack].length-1] + " needs to be bigger than: " + stacks[startStack][stacks[startStack].length-1])
+    return false;
   }
-  if(startStack=='b'){
-    if(endStack=='a'){
-        if(stacks.b[stacks.b.length-1] < stacks.a[stacks.a.length-1] || stacks.a[stacks.a.length-1]==undefined){
-        return true;
-        }
-      else{
-        console.log("Error!" + stacks.b[stacks.b.length-1] + " needs to be lower number than " + stacks.a[stacks.a.length-1]);
-        return false;
-      }
-    }
-    else{
-      if(stacks.b[stacks.b.length-1] < stacks.c[stacks.c.length-1] || stacks.c      [stacks.c.length-1]==undefined){
-        return true;
-    }
-    else{
-      console.log("Error!" + stacks.b[stacks.b.length-1] + " needs to be lower number than " + stacks.c[stacks.c.length-1]);
-      return false;
-      }
-    }
-  }
-    if(startStack=='c'){
-      if(endStack=='a'){
-        if(stacks.c[stacks.c.length-1] < stacks.a[stacks.a.length-1] || stacks.a[stacks.a.length-1]==undefined){
-      return true;
-      }
-      else{
-        console.log("Error!" + stacks.c[stacks.c.length-1] + " needs to be lower number than " + stacks.a[stacks.a.length-1]);
-        return false;
-        }
-      }
-    else{
-        if(stacks.c[stacks.c.length-1] < stacks.b[stacks.b.length-1] || stacks.b[stacks.b.length-1]==undefined){
-        return true;
-        }
-      else{
-          console.log("Error!" + stacks.c[stacks.c.length-1] + " needs to be lower number than " + stacks.b[stacks.b.length-1]);
-          return false;
-        }
-      }
-    }
 }
 
 
 function checkForWin() {
-  return stacks.c[0]==4 && stacks.c[1]==3 && stacks.c[2]==2 && stacks.c[3]==1;
+  return stacks.c.length==4;
 }
 
 function movePiece(startStack, endStack) {
@@ -204,6 +151,25 @@ if (typeof describe === 'function') {
       assert.equal(checkForWin(), true);
       stacks = { a: [1], b: [4, 3, 2], c: [] };
       assert.equal(checkForWin(), false);
+    });
+  });
+
+  describe('#isLegal()', () => {
+    it('should not allow an illegal move', () => {
+      stacks = {
+        a: [4, 3, 2],
+        b: [2],
+        c: [1]
+      };
+      assert.equal(isLegal('b', 'c'), false);
+    });
+    it('should allow a legal move', () => {
+      stacks = {
+        a: [4, 3],
+        b: [2],
+        c: [1]
+      };
+      assert.equal(isLegal('c', 'b'), true);
     });
   });
 
