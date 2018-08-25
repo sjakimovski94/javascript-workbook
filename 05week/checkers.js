@@ -8,12 +8,20 @@ const rl = readline.createInterface({
 });
 
 
-function Checker() {
-  // Your code here
+class Checker{
+  constructor(color){
+    if(color==='red'){
+      this.symbol='R'
+    }
+    else{
+      this.symbol='B'
+    }
+  }
 }
 
 class Board {
   constructor() {
+    this.checkers = []
     this.grid = []
   }
   // method that creates an 8x8 array, filled with null values
@@ -53,6 +61,54 @@ class Board {
   }
 
   // Your code here
+
+  createCheckers () {
+    const redPosition=[
+      [0, 1],
+      [0, 3],
+      [0, 5],
+      [0, 7],
+      [1, 0],
+      [1, 2],
+      [1, 4],
+      [1, 6],
+      [2, 1],
+      [2, 3],
+      [2, 5],
+      [2, 7]
+    ]
+  
+    const blackPosition=[
+      [5, 0],
+      [5, 2],
+      [5, 4],
+      [5, 6],
+      [6, 1],
+      [6, 3],
+      [6, 5],
+      [6, 7],
+      [7, 0],
+      [7, 2],
+      [7, 4],
+      [7, 6]
+    ]
+  
+    for(let i=0; i<12;i++){
+      let redRow= redPosition[i][0];
+      let redColumn = redPosition[i][1]
+      let redChecker = new Checker('red')
+      this.grid[redRow][redColumn]= redChecker;
+    }
+    for(let i=0; i<12;i++){
+      let blackRow= blackPosition[i][0];
+      let blackColumn = blackPosition[i][1]
+      let blackChecker = new Checker('black')
+      this.grid[blackRow][blackColumn]= blackChecker;
+    }
+  }
+  
+
+  
 }
 
 class Game {
@@ -61,6 +117,60 @@ class Game {
   }
   start() {
     this.board.createGrid();
+    this.board.createCheckers();
+
+  }
+
+  moveChecker(source, destination){
+    if(this.isLegalInput(source,destination) && this.isLegalMove(source,destination)){
+    const sourceRow= parseInt(source.charAt(0));
+    const sourceColumn= parseInt(source.charAt(1));
+    const destinationRow= parseInt(destination.charAt(0));
+    const destinationColumn = parseInt(destination.charAt(1));
+
+    this.board.grid[destinationRow][destinationColumn] = this.board.grid[sourceRow][sourceColumn];
+    this.board.grid[sourceRow][sourceColumn] = null;
+    let jumpedRow;
+    let jumpedColumn;
+    if(Math.abs(destinationRow - sourceRow)===2){
+      if(destinationRow-sourceRow>0){
+        jumpedRow=sourceRow+1;
+      }
+      else{
+        jumpedRow=destinationRow+1;
+      }
+      if(destinationColumn-sourceColumn>0){
+        jumpedColumn=sourceColumn+1;
+      }
+      else{
+        jumpedColumn=destinationColumn+1;
+      }
+    this.board.grid[jumpedRow][jumpedColumn]=null;
+    //this.board.grid.pop();
+    }
+  }
+  else{
+    console.log("Valid input")
+  }
+  
+  }
+  isLegalInput(source, destination){
+    const sourceRow= parseInt(source.charAt(0));
+    const sourceColumn= parseInt(source.charAt(1));
+    const destinationRow= parseInt(destination.charAt(0));
+    const destinationColumn = parseInt(destination.charAt(1));
+    let sourceGood=(sourceRow>=0 && sourceRow< 8) && (sourceColumn>=0 && sourceColumn<8)
+    let destinationGood=(destinationRow>=0 && destinationRow<8) && (destinationColumn>=0 && destinationColumn<8)
+    return sourceGood && destinationGood;
+  }
+  isLegalMove(source, destination){
+    const sourceRow= parseInt(source.charAt(0));
+    const sourceColumn= parseInt(source.charAt(1));
+    const destinationRow= parseInt(destination.charAt(0));
+    const destinationColumn = parseInt(destination.charAt(1));
+    let goodRowMove = (Math.abs(destinationRow-sourceRow)<=2)
+    let goodColumnMove = (Math.abs(destinationColumn-sourceColumn)<=2)
+    return (goodRowMove && goodColumnMove)
   }
 }
 
