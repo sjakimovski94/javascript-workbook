@@ -10,7 +10,7 @@ console.log(nums)
 
 
 // Find the sum of the even values
-
+  
 
 const sumEvens = nums.filter((num)=>{
   return num%2===0;
