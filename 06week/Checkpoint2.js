@@ -9,6 +9,8 @@ const nums = strNums.map((num)=>{
 console.log(nums)
 
 
+
+
 // Find the sum of the even values
   
 
