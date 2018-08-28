@@ -11,6 +11,8 @@ console.log(nums)
 
 
 
+
+
 // Find the sum of the even values
   
 
